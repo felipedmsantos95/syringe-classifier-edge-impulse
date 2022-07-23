@@ -37,7 +37,7 @@ async function initializeCamera(){
         console.log('camera error', error);
     });
 
-    console.log('Connected to camera');
+    console.log('Connected to camera, press C key to capture data...');
     return camera
 
 }
@@ -73,6 +73,8 @@ async function initializeCamera(){
 
         await imageClassifier.start();
 
+        let syringeStatus = 'uncertain'
+
         // on any data into stdin
         stdin.on( 'data', function( key ){
             // ctrl-c ( end of text )
@@ -80,7 +82,7 @@ async function initializeCamera(){
                 process.exit();
             }
             if ( key === 'c'){
-                console.log('testa')
+                console.log(syringeStatus)
             }
         });
 
@@ -93,9 +95,9 @@ async function initializeCamera(){
                     c[k] = c[k].toFixed(4);
                 }
 
-                let syringe_status = c.discharged_syringe > c.loaded_syringe ?  'discharged_syringe' : 'loaded_syringe'
+                syringeStatus = c.discharged_syringe > c.loaded_syringe ?  'discharged_syringe' : 'loaded_syringe'
 
-                console.log('classification', timeMs + 'ms.',  syringe_status );
+                //console.log('classification', timeMs + 'ms.',  syringeStatus );
             }
             else if (ev.result.bounding_boxes) {
                 console.log('boundingBoxes', timeMs + 'ms.', JSON.stringify(ev.result.bounding_boxes));
