@@ -1,4 +1,4 @@
-const { ImageClassifier, LinuxImpulseRunner, Ffmpeg, ICamera, Imagesnap } = require('edge-impulse-linux');
+import { ImageClassifier, LinuxImpulseRunner, Ffmpeg, Imagesnap } from 'edge-impulse-linux';
 
 
 async function initializeCamera(){
@@ -42,6 +42,23 @@ async function initializeCamera(){
 
 }
 
+async function initializeEdgeImpulse(){
+    let runner = new LinuxImpulseRunner(process.argv[2]);
+    let model = await runner.init();
+
+    console.log('Starting the image classifier for',
+        model.project.owner + ' / ' + model.project.name, '(v' + model.project.deploy_version + ')');
+    console.log('Parameters',
+        'image size', model.modelParameters.image_input_width + 'x' + model.modelParameters.image_input_height + ' px (' +
+            model.modelParameters.image_channel_count + ' channels)',
+        'classes', model.modelParameters.labels);
+
+    return runner
+
+}
+
+
+
 
 // tslint:disable-next-line: no-floating-promises
 (async () => {
@@ -57,15 +74,7 @@ async function initializeCamera(){
         stdin.resume();
         stdin.setEncoding( 'utf8' );
 
-        let runner = new LinuxImpulseRunner(process.argv[2]);
-        let model = await runner.init();
-
-        console.log('Starting the image classifier for',
-            model.project.owner + ' / ' + model.project.name, '(v' + model.project.deploy_version + ')');
-        console.log('Parameters',
-            'image size', model.modelParameters.image_input_width + 'x' + model.modelParameters.image_input_height + ' px (' +
-                model.modelParameters.image_channel_count + ' channels)',
-            'classes', model.modelParameters.labels);
+        let runner = await initializeEdgeImpulse()
 
         let camera = await initializeCamera();
 
@@ -96,7 +105,6 @@ async function initializeCamera(){
                 }
 
                 syringeStatus = c.discharged_syringe > c.loaded_syringe ?  'discharged_syringe' : 'loaded_syringe'
-
                 //console.log('classification', timeMs + 'ms.',  syringeStatus );
             }
             else if (ev.result.bounding_boxes) {
