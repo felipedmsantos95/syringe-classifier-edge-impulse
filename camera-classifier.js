@@ -106,18 +106,18 @@ const runClassifier = async () => {
 
 
         // on any data into stdin
-        stdin.on( 'data', async function( key ){
-            // ctrl-c ( end of text )
-            if ( key === '\u0003' ) {
-                process.exit();
-            }
-            if ( key === 'c'){
-                let validateSyringeStatus = await confirmVaccineStatus(syringeStatus);
-                vacinnationData.changeSyringeStatus(validateSyringeStatus);
-                console.log(vacinnationData);
-                imageClassifier.stop()
-            }
-        });
+        // stdin.on( 'data', async function( key ){
+        //     // ctrl-c ( end of text )
+        //     if ( key === '\u0003' ) {
+        //         process.exit();
+        //     }
+        //     if ( key === 'c'){
+        //         let validateSyringeStatus = await confirmVaccineStatus(syringeStatus);
+        //         vacinnationData.changeSyringeStatus(validateSyringeStatus);
+        //         console.log(vacinnationData);
+        //         imageClassifier.stop()
+        //     }
+        // });
     }
     catch (ex) {
         console.error(ex);
@@ -127,6 +127,5 @@ const runClassifier = async () => {
 
 
 await runClassifier()
-console.log('Teste')
 
 
