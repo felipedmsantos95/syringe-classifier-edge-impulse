@@ -5,7 +5,7 @@ export class VaccinationData {
         this.nurse = nurse 
         this.vaccineType = vaccineType 
         this.vaccineLot = vaccineLot
-        this.syringeStatus = 'loaded_syringe' 
+        this.syringeStatus = 'uncertain' 
         this.date = new Date()
     }
 

@@ -1,8 +1,12 @@
 {
   "type": "module",
   "dependencies": {
+    "@iota/client": "^2.2.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.1",
     "edge-impulse-linux": "^1.3.9",
+    "express": "^4.18.1",
     "inquirer": "^9.0.2",
-    "@iota/client": "^2.2.3"
+    "morgan": "^1.10.0"
   }
 }

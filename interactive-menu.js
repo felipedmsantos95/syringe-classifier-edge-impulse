@@ -2,7 +2,7 @@ import { VaccinationData } from "./vaccination-data.js";
 import inquirer from 'inquirer';
 
 
-const askQuestions = () => {
+const askUserQuestions = () => {
     const questions = [
         {
             name: 'patient',
@@ -28,16 +28,47 @@ const askQuestions = () => {
     ];
     return inquirer.prompt(questions);
 };
-  
 
-const interactiveMenuData = async () => {
-  
-    const answers = await askQuestions();
-    const { patient, nurse, vaccineType, vaccineLot } = answers
+const confirmClassification = (status) => {
+    let statusMsg = status === 'loaded_syringe'? 'Syringe is loaded, correct?' : 'Syringe is discharged, correct?'
+    
+    const question = [
+        {
+            name: 'syringeStatus',
+            message: statusMsg,
+            type: 'confirm'
+        }
+    ];
+    return inquirer.prompt(question);
+};
 
-    return new VaccinationData(patient, nurse, vaccineType, vaccineLot)
+const classificationResult = (readStatus, confirmed) => {
+    if(confirmed)
+        return readStatus;
+    else if (readStatus === 'loaded_syringe' && !confirmed)
+        return 'discharged_syringe';
+    else if (readStatus === 'discharged_syringe' && !confirmed)
+        return 'loaded_syringe';
+    else
+        return 'uncertain';
+}
+
+const createNewVaccinationData = async () => {
+  
+    const answers = await askUserQuestions();
+    const { patient, nurse, vaccineType, vaccineLot } = answers;
+
+    return new VaccinationData(patient, nurse, vaccineType, vaccineLot);
 
 };
 
+
+const confirmVaccineStatus = async (readStatus) => {
+    const confirm = await confirmClassification(readStatus);
+
+    return classificationResult(readStatus, confirm.syringeStatus)
+
+}
+
   
-export { interactiveMenuData }
+export { createNewVaccinationData, confirmVaccineStatus }

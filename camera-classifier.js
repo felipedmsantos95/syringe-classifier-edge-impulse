@@ -1,4 +1,5 @@
 import { ImageClassifier, LinuxImpulseRunner, Ffmpeg, Imagesnap } from 'edge-impulse-linux';
+import { createNewVaccinationData, confirmVaccineStatus  } from './interactive-menu.js'
 
 
 async function initializeCamera(){
@@ -58,10 +59,10 @@ async function initializeEdgeImpulse(){
 }
 
 
-
+const vacinnationData = await createNewVaccinationData();
 
 // tslint:disable-next-line: no-floating-promises
-(async () => {
+const runClassifier = async () => {
     try  {
         if (!process.argv[2]) {
             console.log('Missing one argument (model file)');
@@ -84,16 +85,7 @@ async function initializeEdgeImpulse(){
 
         let syringeStatus = 'uncertain'
 
-        // on any data into stdin
-        stdin.on( 'data', function( key ){
-            // ctrl-c ( end of text )
-            if ( key === '\u0003' ) {
-                process.exit();
-            }
-            if ( key === 'c'){
-                console.log(syringeStatus)
-            }
-        });
+        
 
         imageClassifier.on('result', (ev, timeMs, imgAsJpg) => {
             if (ev.result.classification) {
@@ -111,12 +103,30 @@ async function initializeEdgeImpulse(){
                 console.log('boundingBoxes', timeMs + 'ms.', JSON.stringify(ev.result.bounding_boxes));
             }
         });
+
+
+        // on any data into stdin
+        stdin.on( 'data', async function( key ){
+            // ctrl-c ( end of text )
+            if ( key === '\u0003' ) {
+                process.exit();
+            }
+            if ( key === 'c'){
+                let validateSyringeStatus = await confirmVaccineStatus(syringeStatus);
+                vacinnationData.changeSyringeStatus(validateSyringeStatus);
+                console.log(vacinnationData);
+                imageClassifier.stop()
+            }
+        });
     }
     catch (ex) {
         console.error(ex);
         process.exit(1);
     }
-})();
+};
 
+
+await runClassifier()
+console.log('Teste')
 
 
