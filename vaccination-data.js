@@ -1,4 +1,3 @@
-
 export class VaccinationData {
     constructor(patient, nurse, vaccineType, vaccineLot){
         this.patient = patient 
