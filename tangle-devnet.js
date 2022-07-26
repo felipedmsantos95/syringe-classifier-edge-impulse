@@ -12,13 +12,11 @@ const tangleIndex = process.env.DEVNET_INDEX || '@test';
 console.log('[TANGLE DEVNET] Checking IOTA node connection...')
 try{
     const status = await client.getInfo()
-    console.log(`[TANGLE DEVNET] IOTA node connected received ${status.nodeinfo.messagesPerSecond} messages per second.\nAvailable in ${status.url}`)
+    console.log(`[TANGLE DEVNET] IOTA node connected, received ${status.nodeinfo.messagesPerSecond} messages per second.\n Check data in https://explorer.iota.org/devnet/indexed/${tangleIndex}`)
 }
 catch(error){
     console.log(error)
 }
-
-
 
 
 const sendDataToTangle = async (data) => {
@@ -30,9 +28,9 @@ const sendDataToTangle = async (data) => {
         .data(JSON.stringify(data))
         .submit();
 
+    console.log(`[TANGLE DEVNET] Data sent successfully!\nCheck it in https://explorer.iota.org/devnet/message/${message.messageId}`)
+
     return message;
 }
-
-
 
 export { sendDataToTangle }

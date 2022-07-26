@@ -29,6 +29,18 @@ const askUserQuestions = () => {
     return inquirer.prompt(questions);
 };
 
+const freezeScreenForCapture = () => {
+    const question = [
+        {
+            name: 'confirmation',
+            message: 'Press ENTER to capture a photo...',
+            type: 'input'
+        }
+    ];
+    return inquirer.prompt(question);
+
+}
+
 const confirmClassification = (status) => {
     let statusMsg = status === 'loaded_syringe'? 'Syringe is loaded, correct?' : 'Syringe is discharged, correct?'
     
@@ -71,4 +83,4 @@ const confirmVaccineStatus = async (readStatus) => {
 }
 
   
-export { createNewVaccinationData, confirmVaccineStatus }
+export { createNewVaccinationData, confirmVaccineStatus, freezeScreenForCapture }

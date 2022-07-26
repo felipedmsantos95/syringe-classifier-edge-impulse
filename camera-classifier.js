@@ -15,22 +15,22 @@ export class EdgeCameraClassifier {
             camera = new Ffmpeg(false /* verbose */);
         }
         else {
-            throw new Error('Unsupported platform "' + process.platform + '"');
+            throw new Error('[EDGE IMPULSE CLI] Unsupported platform "' + process.platform + '"');
         }
         await camera.init();
     
         const devices = await camera.listDevices();
         if (devices.length === 0) {
-            throw new Error('Cannot find any webcams');
+            throw new Error('[EDGE IMPULSE CLI] Cannot find any webcams');
         }
         if (devices.length > 1 && !process.argv[3]) {
-            throw new Error('Multiple cameras found (' + devices.map(n => '"' + n + '"').join(', ') + '), add ' +
+            throw new Error('[EDGE IMPULSE CLI] Multiple cameras found (' + devices.map(n => '"' + n + '"').join(', ') + '), add ' +
                 'the camera to use to this script (node classify-camera.js model.eim cameraname)');
         }
     
         let device = process.argv[3] || devices[0];
     
-        console.log('Using camera', device, 'starting...');
+        console.log('[EDGE IMPULSE CLI] Using camera', device, 'starting...');
     
         await camera.start({
             device: device,
@@ -41,7 +41,7 @@ export class EdgeCameraClassifier {
             console.log('camera error', error);
         });
     
-        console.log('Connected to camera, waiting for POST to send data...');
+        console.log('[EDGE IMPULSE CLI] Connected to camera, waiting for POST to send data...');
         return camera
     
     }
@@ -50,9 +50,9 @@ export class EdgeCameraClassifier {
         let runner = new LinuxImpulseRunner(process.argv[2]);
         let model = await runner.init();
     
-        console.log('Starting the image classifier for',
+        console.log('[EDGE IMPULSE CLI] Starting the image classifier for',
             model.project.owner + ' / ' + model.project.name, '(v' + model.project.deploy_version + ')');
-        console.log('Parameters',
+        console.log('[EDGE IMPULSE CLI] Parameters',
             'image size', model.modelParameters.image_input_width + 'x' + model.modelParameters.image_input_height + ' px (' +
                 model.modelParameters.image_channel_count + ' channels)',
             'classes', model.modelParameters.labels);
@@ -75,8 +75,6 @@ export class EdgeCameraClassifier {
             let imageClassifier = new ImageClassifier(runner, camera);
 
             await imageClassifier.start();
-
-
             
 
             imageClassifier.on('result', (ev, timeMs, imgAsJpg) => {
@@ -89,8 +87,7 @@ export class EdgeCameraClassifier {
                     }
 
                     this.syringeStatus = c.discharged_syringe > c.loaded_syringe ?  'discharged_syringe' : 'loaded_syringe'
-                    //console.log(this.syringeStatus)
-                    //console.log('classification', timeMs + 'ms.',  syringeStatus );
+                    //console.log('classification', timeMs + 'ms.',  this.syringeStatus );
                 }
                 else if (ev.result.bounding_boxes) {
                     console.log('boundingBoxes', timeMs + 'ms.', JSON.stringify(ev.result.bounding_boxes));
