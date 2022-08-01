@@ -18,7 +18,7 @@ const askUserQuestions = () => {
             name: 'vaccineType',
             message: 'Wich vaccine is being applied? ',
             type: 'list',
-            choices: ['Pfizer', 'Jansen', 'Aztrazeneca', 'CoronaVac', 'Influenza']
+            choices: ['Pfizer', 'Jansen', 'Astrazeneca', 'CoronaVac', 'Influenza']
         },
         {
             name: 'vaccineLot',
