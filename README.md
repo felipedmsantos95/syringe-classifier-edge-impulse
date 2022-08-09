@@ -21,8 +21,8 @@ Runs a Edge Impulse machine learning model thats classify loaded and discharged 
 
 
 
-* Connect a camera and run ```node camera-classifier.js modelfile.eim```
-  * If you get an error that shows you all available cameras, run ```node camera-classifier.js modelfile.eim <camera name>```
+* Connect a camera and run ```npm start```
+  * If you get an error that shows you all available cameras, run ```node index.js modelfile.eim <camera name>```
 
 
 PS: If you want, you can download your own model file from your Edge Impulse project/account with: ```edge-impulse-linux-runner --download modelfile.eim```

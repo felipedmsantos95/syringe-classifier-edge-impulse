@@ -1,4 +1,4 @@
-import { VaccinationData } from "./vaccination-data.js";
+import { VaccinationData } from "../models/vaccination-data.js";
 import inquirer from 'inquirer';
 
 

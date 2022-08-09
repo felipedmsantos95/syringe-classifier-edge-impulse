@@ -2,8 +2,7 @@
   "type": "module",
   "scripts": {
     "start": "node index.js modelfile.eim",
-    "dev": "nodemon index.js modelfile.eim",
-    "classify": "node camera-classifier.js modelfile.eim"
+    "dev": "nodemon index.js modelfile.eim"
   },
   "dependencies": {
     "@iota/client": "^2.2.3",

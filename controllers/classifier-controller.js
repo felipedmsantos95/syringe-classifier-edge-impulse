@@ -1,33 +1,28 @@
-import express from 'express';
-import { sendDataToTangle } from './tangle-devnet.js'
-import { createNewVaccinationData, confirmVaccineStatus, freezeScreenForCapture } from './interactive-menu.js';
-import { startSampling } from './start-sampling.js';
-import { EdgeCameraClassifier } from './camera-classifier.js';
+import { sendDataToTangle } from '../services/tangle-devnet.js'
+import { createNewVaccinationData, confirmVaccineStatus, freezeScreenForCapture } from '../services/interactive-menu.js';
+import { sendImageToDataset } from '../services/send-image.js';
+import { EdgeCameraClassifier } from '../models/camera-classifier.js';
 
 
-const routes = express.Router();
+
 //Initializing Classifier
 const edgeCamera = new EdgeCameraClassifier();
 await edgeCamera.runClassifier();
 
 
-
-
-routes.post('/start-sampling', async (request, response) => {
+const startSampling = async (request, response) => {
 
     const status = request.body.status;
 
-    const sampling = await startSampling(status);
+    const sampling = await sendImageToDataset(status);
 
     response.status(sampling.status).send(sampling.data)
 
-})
+}
 
 
+const startVaccination = async (request, response) => {
 
-routes.post('/capture', async (request, response) => {
-    
-    
     const vacinnationData = await createNewVaccinationData();
     
     await freezeScreenForCapture();
@@ -46,8 +41,8 @@ routes.post('/capture', async (request, response) => {
                     idTransaction: dataToIota.messageId 
                 })
 
-	
-})
+
+}
 
 
-export default routes;
+export default { startSampling, startVaccination }

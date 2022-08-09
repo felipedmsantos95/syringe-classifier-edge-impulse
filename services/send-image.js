@@ -6,7 +6,7 @@ const deviceId = process.env.DEVICE_ID;
 const edgeImpulseKey = process.env.EDGE_IMPULSE_API_KEY;
 
 
-const startSampling = async (expected) => {
+const sendImageToDataset = async (expected) => {
 
     let url = `https://studio.edgeimpulse.com/v1/api/${projectId}/device/${deviceId}/start-sampling`;
 
@@ -36,4 +36,4 @@ const startSampling = async (expected) => {
 
 }
 
-export { startSampling }
+export { sendImageToDataset }
