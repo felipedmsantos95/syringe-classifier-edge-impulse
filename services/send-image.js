@@ -36,4 +36,17 @@ const sendImageToDataset = async (expected) => {
 
 }
 
-export { sendImageToDataset }
+
+const datasetIncrease = async (expected) => {
+
+    const sampling = await sendImageToDataset(expected);
+
+    const isSuccess = sampling.data.success;
+
+    return isSuccess ? 'Image sent to training dataset' : `Image didn\'t send to training dataset.\nReason: ${sampling.data.error} `
+
+
+}
+
+
+export { sendImageToDataset, datasetIncrease }
