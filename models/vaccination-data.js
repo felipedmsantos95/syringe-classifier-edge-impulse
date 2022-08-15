@@ -6,10 +6,15 @@ export class VaccinationData {
         this.vaccineLot = vaccineLot
         this.syringeStatus = 'uncertain' 
         this.date = new Date()
+        this.photoSent = false
     }
 
     changeSyringeStatus(status){
         this.syringeStatus = status
+    }
+
+    changePhotoSentStatus(status){
+        this.photoSent = status
     }
 
 }

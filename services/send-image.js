@@ -12,8 +12,8 @@ const sendImageToDataset = async (expected) => {
 
     let headers = { 
             headers: {
-            'content-type': 'application/json',
-            'x-api-key': edgeImpulseKey
+                'content-type': 'application/json',
+                'x-api-key': edgeImpulseKey
             }
     };
     
@@ -43,8 +43,9 @@ const datasetIncrease = async (expected) => {
 
     const isSuccess = sampling.data.success;
 
-    return isSuccess ? 'Image sent to training dataset' : `Image didn\'t send to training dataset.\nReason: ${sampling.data.error} `
+    const messageStatus = isSuccess ? 'Image sent to training dataset' : `Image didn\'t send to training dataset. Reason: ${sampling.data.error}`
 
+    return { status: isSuccess, msg: messageStatus }
 
 }
 

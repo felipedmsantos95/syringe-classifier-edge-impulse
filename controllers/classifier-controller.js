@@ -32,6 +32,7 @@ const startVaccination = async (request, response) => {
     const sendingImageToDataset = await datasetIncrease(confirmedStatus);
 
     vacinnationData.changeSyringeStatus(confirmedStatus)
+    vacinnationData.changePhotoSentStatus(sendingImageToDataset.status)
 
     const dataToIota = await sendDataToTangle(vacinnationData)
 
@@ -40,7 +41,7 @@ const startVaccination = async (request, response) => {
             .send({
                     ...vacinnationData,
                     idTransaction: dataToIota.messageId,
-                    trainingDataset: sendingImageToDataset
+                    trainingDataset: sendingImageToDataset.msg
                 })
 
 
