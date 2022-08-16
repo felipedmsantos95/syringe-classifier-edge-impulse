@@ -12,7 +12,7 @@ Runs a Edge Impulse machine learning model thats classify loaded and discharged 
 
 * Node Js
 * Camera
-* If there is no prebuilt binary available for @iota/client your system you need Rust and Cargo, to build it yourself. Install them [here](https://doc.rust-lang.org/cargo/getting-started/installation.html).
+* If there is no prebuilt binary available for @iota/client in your system you need Rust and Cargo, to build it yourself. Install them [here](https://doc.rust-lang.org/cargo/getting-started/installation.html).
 
 ### Steps
 
