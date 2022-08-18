@@ -3,7 +3,7 @@
 
 ## About
 
-Runs a Edge Impulse machine learning model thats classify loaded and discharged syringes to help in vaccination campains and use IOTA Tangle as descentralized database.
+Runs a [Edge Impulse](https://www.edgeimpulse.com/) machine learning model thats classify loaded and discharged syringes to help in vaccination campains and use IOTA Tangle as descentralized database.
 
 
 ## Installation
