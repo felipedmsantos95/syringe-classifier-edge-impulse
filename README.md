@@ -1,4 +1,4 @@
-# Edge Impulse Syringe Camera Classifier
+# Edge Impulse - Syringe classifier with camera
 
 
 ## About
