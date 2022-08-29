@@ -23,7 +23,7 @@ const sendImageToDataset = async (expected) => {
         lengthMs: 0,
         category: 'training',
         intervalMs: 0,
-        sensor: 'Camera'
+        sensor: 'Camera (640x480)'
     };
     
     try {
