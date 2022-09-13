@@ -26,7 +26,7 @@ Runs a [Edge Impulse](https://www.edgeimpulse.com/) machine learning model thats
   * If you get an error that shows you all available cameras, run ```node index.js modelfile.eim <camera name>```
 
 
-PS: If you want, you can download your own model file from your Edge Impulse project/account with: ```edge-impulse-linux-runner --download modelfile.eim```
+PS: You need to download your own model file from your Edge Impulse project/account, with exactly two labels in your dataset for working with this project: ```discharged_syringe``` and ```loaded_syringe```, you can download your model file by running the following command: ```edge-impulse-linux-runner --download modelfile.eim```
 
 
 
