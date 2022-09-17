@@ -5,7 +5,6 @@ const deviceId = process.env.DEVICE_ID;
 const edgeImpulseKey = process.env.EDGE_IMPULSE_API_KEY;
 const deviceCamera = process.env.DEVICE_SENSOR || 'Camera';
 
-
 const sendImageToDataset = async (expected) => {
 
     let url = `https://studio.edgeimpulse.com/v1/api/${projectId}/device/${deviceId}/start-sampling`;
@@ -36,7 +35,6 @@ const sendImageToDataset = async (expected) => {
 
 }
 
-
 const datasetIncrease = async (expected) => {
 
     const sampling = await sendImageToDataset(expected);
@@ -48,6 +46,5 @@ const datasetIncrease = async (expected) => {
     return { status: isSuccess, msg: messageStatus }
 
 }
-
 
 export { sendImageToDataset, datasetIncrease }
