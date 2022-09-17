@@ -1,9 +1,9 @@
 import axios from 'axios';
 
-
 const projectId = process.env.EDGE_IMPULSE_PROJECT_ID;
 const deviceId = process.env.DEVICE_ID;
 const edgeImpulseKey = process.env.EDGE_IMPULSE_API_KEY;
+const deviceCamera = process.env.DEVICE_SENSOR || 'Camera';
 
 
 const sendImageToDataset = async (expected) => {
@@ -23,7 +23,7 @@ const sendImageToDataset = async (expected) => {
         lengthMs: 0,
         category: 'training',
         intervalMs: 0,
-        sensor: 'Camera (640x480)'
+        sensor: deviceCamera,
     };
     
     try {

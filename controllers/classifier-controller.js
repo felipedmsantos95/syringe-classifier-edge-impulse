@@ -9,7 +9,6 @@ import { EdgeCameraClassifier } from '../models/camera-classifier.js';
 const edgeCamera = new EdgeCameraClassifier();
 await edgeCamera.runClassifier();
 
-
 const startSampling = async (request, response) => {
 
     const status = request.body.status;
@@ -19,7 +18,6 @@ const startSampling = async (request, response) => {
     response.status(sampling.status).send(sampling.data)
 
 }
-
 
 const startVaccination = async (request, response) => {
 
@@ -39,13 +37,12 @@ const startVaccination = async (request, response) => {
 
     response.status(200)
             .send({
-                    ...vacinnationData,
-                    idTransaction: dataToIota.messageId,
-                    trainingDataset: sendingImageToDataset.msg
-                })
+                ...vacinnationData,
+                idTransaction: dataToIota.messageId,
+                trainingDataset: sendingImageToDataset.msg
+            })
 
 
 }
-
 
 export default { startSampling, startVaccination }

@@ -1,7 +1,6 @@
 import { VaccinationData } from "../models/vaccination-data.js";
 import inquirer from 'inquirer';
 
-
 const askUserQuestions = () => {
     const questions = [
         {

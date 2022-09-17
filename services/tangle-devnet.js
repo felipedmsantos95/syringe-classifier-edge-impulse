@@ -7,8 +7,6 @@ const client = new ClientBuilder()
 
 const tangleIndex = process.env.DEVNET_INDEX || '@test';
 
-
-//You can uncomment the line below to check IOTA node connection
 console.log('[TANGLE DEVNET] Checking IOTA node connection...')
 try{
     const status = await client.getInfo()
@@ -17,7 +15,6 @@ try{
 catch(error){
     console.log(error)
 }
-
 
 const sendDataToTangle = async (data) => {
 
