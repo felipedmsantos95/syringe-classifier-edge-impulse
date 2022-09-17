@@ -16,7 +16,6 @@ const sendImageToDataset = async (expected) => {
             }
     };
     
-    
     let payload = {
         label: expected,
         lengthMs: 0,
