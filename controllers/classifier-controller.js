@@ -29,15 +29,28 @@ const startVaccination = async (request, response) => {
     const confirmedStatus = await confirmVaccineStatus(readStatus);
     const sendingImageToDataset = await datasetIncrease(confirmedStatus);
 
-    vacinnationData.changeSyringeStatus(confirmedStatus)
-    vacinnationData.changePhotoSentStatus(sendingImageToDataset.status)
+    vacinnationData.changeSyringeStatus(confirmedStatus);
+    vacinnationData.changePhotoSentStatus(sendingImageToDataset.status);
 
-    const dataToIota = await sendDataToTangle(vacinnationData)
+    const dataToIota = await sendDataToTangle(vacinnationData);
 
+    const { 
+            patient,
+            nurse,
+            vaccineType,
+            vaccineLot,
+            syringeStatus,
+            date 
+        } = vacinnationData
 
     response.status(200)
             .send({
-                ...vacinnationData,
+                patient,
+                nurse,
+                vaccineType,
+                vaccineLot,
+                syringeStatus,
+                date,
                 idTransaction: dataToIota.messageId
             })
 
