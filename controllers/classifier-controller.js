@@ -38,8 +38,7 @@ const startVaccination = async (request, response) => {
     response.status(200)
             .send({
                 ...vacinnationData,
-                idTransaction: dataToIota.messageId,
-                trainingDataset: sendingImageToDataset.msg
+                idTransaction: dataToIota.messageId
             })
 
 
