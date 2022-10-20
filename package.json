@@ -2,6 +2,7 @@
   "type": "module",
   "scripts": {
     "cameras": "node index.js modelfile.eim",
+    "download-model": "edge-impulse-linux-runner --download modelfile.eim",
     "start": "node index.js modelfile.eim \"mmal service 16.1\"",
     "dev": "nodemon index.js modelfile.eim"
   },
